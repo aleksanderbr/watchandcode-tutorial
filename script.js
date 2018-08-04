@@ -1,5 +1,5 @@
 
-/*
+/*  V1
 var todos = ["item 1", "item 2", "item 3", "item 4"];
 function displayTodos(){
     console.log("My Todos: ", todos);
@@ -18,6 +18,7 @@ function deleteTodo(itemPosition){
 }
 */
 
+/*  V2
 var todoList = {
     todos: ["item 1", "item 2", "item 3"],
     displayTodos: function(){
@@ -36,4 +37,37 @@ var todoList = {
         this.displayTodos();
     }
 };
+*/
 
+//  V3
+var toDoList = {
+
+    toDos: [],
+
+    displayToDos: function(){
+        console.log("My Todos: ", this.toDos);
+    },
+
+    addToDo: function(toDoText){
+        this.toDos.push({
+            toDoText: toDoText,
+            completed: false
+        });
+        this.displayToDos();
+    },
+
+    changeToDo: function(position, toDoText){
+        this.toDos[position].toDoText = toDoText;
+        this.displayToDos();
+    },
+
+    deleteToDo: function(itemPosition){
+        this.toDos.splice(itemPosition, 1);
+        this.displayToDos();
+    },
+
+    toggleCompleted: function(position){
+        this.toDos[position].completed = !this.toDos[position].completed;
+        this.displayToDos();
+    }
+};
