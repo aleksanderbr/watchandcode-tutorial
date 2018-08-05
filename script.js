@@ -1,57 +1,29 @@
-
-/*  V1
-var todos = ["item 1", "item 2", "item 3", "item 4"];
-function displayTodos(){
-    console.log("My Todos: ", todos);
-}
-function addTodo(todo){
-    todos.push(todo);
-    displayTodos();
-}
-function changeTodo(itemPosition, newValue){
-    todos[itemPosition] = newValue;
-    displayTodos();
-}
-function deleteTodo(itemPosition){
-    todos.splice(itemPosition, 1);
-	displayTodos();
-}
-*/
-
-/*  V2
-var todoList = {
-    todos: ["item 1", "item 2", "item 3"],
-    displayTodos: function(){
-        console.log("My Todos: ", this.todos);
-    },
-    addTodo: function(todo){
-        this.todos.push(todo);
-        this.displayTodos();
-    },
-    changeTodo: function(itemPosition, newValue){
-        this.todos[itemPosition] = newValue;
-        this.displayTodos();
-    },
-    deleteTodo: function(itemPosition){
-        this.todos.splice(itemPosition, 1);
-        this.displayTodos();
-    }
-};
-*/
-
-//  V3
 var toDoList = {
 
     toDos: [],
 
     displayToDos: function(){
-        console.log("My Todos: ", this.toDos);
+        if(this.toDos.length === 0){
+            console.log("List is Empty!");
+        }
+        else{
+            console.log("My To-Do's: ");
+            for(i = 0; i < this.toDos.length; i++){
+                if(this.toDos[i].completed === false){
+                    completedChecker = "( )";
+                }
+                else{
+                    completedChecker = "( X )";
+                }
+                console.log(this.toDos[i].toDoText, completedChecker);
+            }
+        }
     },
 
     addToDo: function(toDoText){
         this.toDos.push({
             toDoText: toDoText,
-            completed: false
+            completed: false,
         });
         this.displayToDos();
     },
