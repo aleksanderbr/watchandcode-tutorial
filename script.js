@@ -1,7 +1,7 @@
+//FUNCTIONALITY OBJECT
+
 var toDoList = {
-
     toDos: [],
-
     displayToDos: function(){
         if(this.toDos.length === 0){
             console.log("List is Empty!");
@@ -19,7 +19,6 @@ var toDoList = {
             }
         }
     },
-
     addToDo: function(toDoText){
         this.toDos.push({
             toDoText: toDoText,
@@ -27,22 +26,18 @@ var toDoList = {
         });
         this.displayToDos();
     },
-
     changeToDo: function(position, toDoText){
         this.toDos[position].toDoText = toDoText;
         this.displayToDos();
     },
-
     deleteToDo: function(itemPosition){
         this.toDos.splice(itemPosition, 1);
         this.displayToDos();
     },
-
     toggleCompleted: function(position){
         this.toDos[position].completed = !this.toDos[position].completed;
         this.displayToDos();
     },
-
     toggleAll: function(){
         toggleCount = 0;
         totalTodos = this.toDos.length;
@@ -63,6 +58,17 @@ var toDoList = {
         };
 
         this.displayToDos();
-
     }
 };
+
+// TODO BUTTON
+var todoButton = document.getElementById("displayTodoButton");
+todoButton.addEventListener("click", function() {
+    toDoList.displayToDos();
+});
+
+//TOGGLE ALL BUTTON
+var toggleButton = document.getElementById("toggleAllButton");
+toggleButton.addEventListener("click", function(){
+    toDoList.toggleAll();
+});
