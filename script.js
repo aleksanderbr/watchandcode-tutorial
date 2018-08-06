@@ -69,9 +69,11 @@ var toDoList = {
     }
 };
 
+//CONNECT FUNCTIONALITY TO BUTTONS
+
 var handlers = {
     displayTodo: function() {
-        toDoList.displayToDos();
+        view.displayTodos();
     },
     addToDo: function(){
         var addTodoTextInput = document.getElementById("addTodoTextInput");
@@ -99,3 +101,25 @@ var handlers = {
         toDoList.toggleAll();
     },
 };
+
+
+//DISPLAY VISIBLE USER OUTPUT
+
+var view = {
+    displayTodos: function(){
+        var todoUl = document.getElementById("ul");
+        todoUl.innerHTML = "";
+        for(i = 0; i < toDoList.toDos.length; i++){
+            var todoLi = document.createElement("li");
+            if(toDoList.toDos[i].completed === true){
+                todoLi.textContent = "(X) " + toDoList.toDos[i].toDoText;
+            }
+            else{
+                todoLi.textContent = "( ) " + toDoList.toDos[i].toDoText;
+            };
+            todoUl.appendChild(todoLi);
+        };
+    }
+};
+
+
