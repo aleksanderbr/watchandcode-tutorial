@@ -44,7 +44,7 @@ var toDoList = {
     }
 };
 
-//CONNECT FUNCTIONALITY TO BUTTONS
+//CONNECT FUNCTIONALITY TO BUTTON
 
 var handlers = {
     addToDo: function(){
