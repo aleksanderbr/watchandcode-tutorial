@@ -28,21 +28,19 @@ var toDoList = {
     toggleAll: function(){
         toggleCount = 0;
         totalTodos = this.toDos.length;
-        for(i = 0; i < this.toDos.length;  i++){
-            if(this.toDos[i].completed === true){
+        this.toDos.forEach(function(todo){
+            if(todo.completed === true){
                 toggleCount++;
             }
-        };
-        if(toggleCount === totalTodos){
-            for(i = 0; i < this.toDos.length; i++){
-                this.toDos[i].completed = false;        
+        });
+        this.toDos.forEach(function(todo){
+            if(toggleCount == totalTodos){
+                todo.completed = false;
             }
-        }
-        else{
-            for(i = 0; i < this.toDos.length; i++){
-                this.toDos[i].completed = true;
+            else{
+                todo.completed = true;
             }
-        };
+        });
     }
 };
 
@@ -63,10 +61,8 @@ var handlers = {
         changeTodoPositionInput.value = "";
         view.displayTodos();
     },
-    deleteTodo: function(){
-        var deleteTodoPositionInput = document.getElementById("deleteTodoPositionInput");
-        toDoList.deleteToDo(deleteTodoPositionInput.value - 1);
-        deleteTodoPositionInput.value = "";
+    deleteTodo: function(position){
+        toDoList.deleteToDo(position);
         view.displayTodos();
     },
     toggleTodo: function(){
@@ -88,17 +84,37 @@ var view = {
     displayTodos: function(){
         var todoUl = document.getElementById("ul");
         todoUl.innerHTML = "";
-        for(i = 0; i < toDoList.toDos.length; i++){
+        toDoList.toDos.forEach(function(todo, position){
             var todoLi = document.createElement("li");
-            if(toDoList.toDos[i].completed === true){
-                todoLi.textContent = "(X) " + toDoList.toDos[i].toDoText;
+            if(todo.completed === true){
+                todoLi.textContent = "(X) " + todo.toDoText;
             }
             else{
-                todoLi.textContent = "( ) " + toDoList.toDos[i].toDoText;
+                todoLi.textContent = "( ) " + todo.toDoText;
             };
+            todoLi.id = position;
+            todoLi.appendChild(this.createDeleteButton());
             todoUl.appendChild(todoLi);
-        };
+        }, this);
+    },
+    createDeleteButton: function() {
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "deleteButton";
+        return deleteButton;
+    },
+    setUpEventListeners: function(){
+        var todosUl = document.querySelector("ul");
+        todosUl.addEventListener("click", function(event){
+            var elementClicked = event.target;
+            if(elementClicked.className === "deleteButton"){
+                handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+            };
+        });
     }
+
 };
+
+view.setUpEventListeners();
 
 
